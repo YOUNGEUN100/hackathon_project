@@ -22,6 +22,7 @@ https://drive.google.com/drive/folders/1YSizHIC-f4vsfHBZkUbMnskUrKw1VF54?usp=dri
 
 ## 👨‍👩‍👦‍👦 팀원
 - 김현재
+- 노태효 (helper)
 - 박호연
 - 서영은
 - 정인태
