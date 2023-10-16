@@ -18,6 +18,7 @@ https://drive.google.com/drive/folders/1YSizHIC-f4vsfHBZkUbMnskUrKw1VF54?usp=dri
 - 10/6(금) 서류 결과 발표 [모임]
 - 10/11(수) 화면 설계 구체화, 플로우 차트 수정 [회의]
 - 10/13(금) 오리엔테이션 [온라인]
+- 10/16(월) 화면설계 [온라인]
 - 10/20(금) 14:00 💛 멘토링 예정
 
 ## 👨‍👩‍👦‍👦 팀원
