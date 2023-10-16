@@ -1,12 +1,13 @@
 import {Text, View} from 'react-native';
 import * as React from 'react';
+import VoiceListening from '../components/VoiceListening';
 
-function Directions() {
+function BusStop() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>길안내 화면</Text>
+      <Text>버스 정류장</Text>
+      <VoiceListening />
     </View>
   );
 }
-
-export default Directions;
+export default BusStop;
