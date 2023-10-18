@@ -4,11 +4,12 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import BusSearchScreen from './src/pages/BusSearchScreen';
 import RouteGuideScreen from './src/pages/RouteGuideScreen';
 import SearchHistoryScreen from './src/pages/SearchHistoryScreen';
 import Setting from './src/pages/Setting';
+import usePermissions from './src/hooks/usePermissions';
 
 // 페이지의 목록
 type RootStackParamList = {
@@ -34,13 +35,19 @@ function HomeScreen({navigation}: HomeScreenProps) {
       </Pressable>
       <Text style={styles.titleText}>넘버스</Text>
       <View style={styles.screenButtonZoon}>
-        <Pressable onPress={() => navigation.navigate('BusSearch')} style={styles.screenButton}>
+        <Pressable
+          onPress={() => navigation.navigate('BusSearch')}
+          style={styles.screenButton}>
           <Text style={styles.screenButtonText}>버스찾기</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('RouteGuide')} style={styles.screenButton}>
+        <Pressable
+          onPress={() => navigation.navigate('RouteGuide')}
+          style={styles.screenButton}>
           <Text style={styles.screenButtonText}>길안내</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('SearchHistory')} style={styles.screenButton}>
+        <Pressable
+          onPress={() => navigation.navigate('SearchHistory')}
+          style={styles.screenButton}>
           <Text style={styles.screenButtonText}>검색내역</Text>
         </Pressable>
       </View>
@@ -50,6 +57,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function App() {
+  usePermissions();
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -71,7 +80,7 @@ function App() {
         <Stack.Screen
           name="RouteGuide"
           component={RouteGuideScreen}
-          options={{title: '길안내' , headerShown: false}}
+          options={{title: '길안내', headerShown: false}}
         />
         <Stack.Screen
           name="SearchHistory"
