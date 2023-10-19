@@ -14,7 +14,7 @@ import {theme} from './src/assets/color';
 // @ts-ignore
 import busImg from './src/assets/images/bus.png';
 import settingImg from './src/assets/images/setting-button.png';
-// import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 // 페이지의 목록
 type RootStackParamList = {
@@ -36,7 +36,6 @@ function HomeScreen({navigation}: HomeScreenProps) {
       <View style={styles.title}>
         <Text style={styles.titleText}>넘버스</Text>
         <Image source={busImg} />
-        {/*<Icon name="caretup" size={40} color={theme.white} />*/}
       </View>
       <View style={styles.screenButtonZoon}>
         <Pressable
