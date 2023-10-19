@@ -4,12 +4,17 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import BusSearchScreen from './src/pages/BusSearchScreen';
 import RouteGuideScreen from './src/pages/RouteGuideScreen';
 import SearchHistoryScreen from './src/pages/SearchHistoryScreen';
 import Setting from './src/pages/Setting';
 import usePermissions from './src/hooks/usePermissions';
+import {theme} from './src/assets/color';
+// @ts-ignore
+import busImg from './src/assets/images/bus.png';
+import settingImg from './src/assets/images/setting-button.png';
+// import Icon from 'react-native-vector-icons/AntDesign';
 
 // 페이지의 목록
 type RootStackParamList = {
@@ -24,16 +29,15 @@ type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 function HomeScreen({navigation}: HomeScreenProps) {
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Pressable onPress={() => navigation.navigate('Setting')}>
-        <Text>환경설정</Text>
+    <View style={styles.container}>
+      <Pressable onPress={() => navigation.navigate('Setting')} style={styles.settingButton}>
+        <Image source={settingImg} />
       </Pressable>
-      <Text style={styles.titleText}>넘버스</Text>
+      <View style={styles.title}>
+        <Text style={styles.titleText}>넘버스</Text>
+        <Image source={busImg} />
+        {/*<Icon name="caretup" size={40} color={theme.white} />*/}
+      </View>
       <View style={styles.screenButtonZoon}>
         <Pressable
           onPress={() => navigation.navigate('BusSearch')}
@@ -93,23 +97,43 @@ function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.bg,
+  },
+  settingButton: {
+    position: 'absolute', // 절대 위치 설정
+    top: 30, // 상단에서의 거리
+    right: 30, // 오른쪽에서의 거리
+  },
+  title: {
+    marginTop: 35,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   titleText: {
-    fontSize: 35,
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: theme.white,
+    marginRight: 10,
   },
   screenButtonZoon: {
-    marginTop: 30,
+    marginTop: 60,
   },
   screenButton: {
-    backgroundColor: 'gray',
+    backgroundColor: theme.yellow,
     paddingHorizontal: 80,
     paddingVertical: 20,
     borderRadius: 10,
-    marginBottom: 30,
+    marginBottom: 60,
   },
   screenButtonText: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: theme.black,
   },
 });
 

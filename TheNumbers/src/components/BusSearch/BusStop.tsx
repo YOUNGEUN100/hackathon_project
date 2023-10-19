@@ -1,63 +1,67 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import * as React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {BusStackParamList} from '../../pages/BusSearchScreen';
 import {useCallback, useEffect, useState} from 'react';
-// import * as Location from 'expo-location';
+import Geolocation from '@react-native-community/geolocation';
+import {theme} from '../../assets/color';
+import busStopImg from '../../assets/images/bus-stop.png';
+import {styles} from '../../assets/styles';
 
 type BusSearchScreenProps = NativeStackScreenProps<
   BusStackParamList,
   'BusStop'
 >;
 function BusStop({navigation}: BusSearchScreenProps) {
-  // const [location, setLocation] = useState('');
-  // const getBusStop = async () => {
-  //   const {granted} = await Location.requestForegroundPermissionsAsync();
-  //   const {
-  //     coords: {latitude, longitude},
-  //   } = await Location.getCurrentPositionAsync({accuracy: 5});
-  //   const location = await Location.reverseGeocodeAsync({latitude, longitude});
-  //   setLocation(location[0].region);
-  // };
-  //
-  // useEffect(() => {
-  //   getBusStop();
-  // }, []);
+  const [myPosition, setMyPosition] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+  const [myBusStop, setMyBusStop] = useState('');
 
   const toBusNumber = useCallback(() => {
     navigation.navigate('BusNumber');
   }, [navigation]);
 
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      info => {
+        setMyPosition({
+          latitude: info.coords.latitude,
+          longitude: info.coords.longitude,
+        });
+      },
+      console.error,
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+      },
+    );
+  }, []);
+
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <View>
-        <Text>📍 정류장명</Text>
-        {/*<Text>{location}</Text>*/}
-        <Text>인헌시장입구</Text>
-        <Text>21562(정류장 넘버)</Text>
-        <Text>389m(현재 위치와의 거리)</Text>
+    <View style={styles.container}>
+      <View style={styles.textZoon}>
+        <View style={{flexDirection: 'row'}}>
+          <Image source={busStopImg} />
+          <Text style={{color: theme.white, fontSize: 20}}>정류장명</Text>
+        </View>
+        <View style={styles.border} />
+        <Text style={styles.busStopName}>인헌시장입구</Text>
+        <Text style={styles.busStopNum}>21562</Text>
+        <Text style={styles.busStopMeter}>389m 이내</Text>
+        <Text>{myPosition?.latitude}</Text>
+        <Text>{myPosition?.longitude}</Text>
       </View>
-      <View>
-        <Pressable>
-          <Text>버스 정류장 변경</Text>
-        </Pressable>
-      </View>
-      <View>
-        <Pressable onPress={toBusNumber} style={styles.button}>
-          <Text>버스번호 입력</Text>
-        </Pressable>
-      </View>
+      <Pressable style={styles.changeButton}>
+        <Text style={styles.changeButtonText}>버스 정류장 변경</Text>
+      </Pressable>
+      <View style={styles.border} />
+      <Pressable onPress={toBusNumber} style={styles.nextButton}>
+        <Text style={styles.nextButtonText}>▶ 버스번호 입력</Text>
+      </Pressable>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    marginTop: 20,
-    backgroundColor: 'gray',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-  },
-});
 export default BusStop;

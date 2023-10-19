@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator<GuideStackParamList>();
 
 function RouteGuideScreen() {
   return (
-    <Stack.Navigator initialRouteName="Departure">
+    <Stack.Navigator initialRouteName="CheckLocation">
       <Stack.Screen
         name="Departure"
         component={Departure}

@@ -1,6 +1,9 @@
 export const theme = {
-  bg: 'black',
-  gray: '#3A3D40',
-  taskBg: '#3A3D40',
-  trash: '#A6A8AC',
+  bg: '#000000',
+  black: '#000000',
+  white: '#FFFFFF',
+  gray: '#D9D9D9',
+  yellow: '#F2F564',
+  green: '#1ED800',
+  red: '#FF2E00',
 };
