@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, Image, Pressable} from 'react-native';
 import Voice from '@react-native-voice/voice';
+import {theme} from '../assets/color';
+import voiceImg from '../assets/images/voice.png';
+import stopButton from '../assets/images/stop-button.png';
 
 const VoiceListening = () => {
   const [text, setText] = useState('');
@@ -40,9 +43,14 @@ const VoiceListening = () => {
     <View style={styles.container}>
       <Text style={styles.transcriptionText}>{text}</Text>
       {isListening ? (
-        <Button title="멈추기" onPress={stopListening} />
+        <Pressable onPress={stopListening}>
+          <Image source={stopButton} />
+        </Pressable>
       ) : (
-        <Button title="듣기 시작" onPress={startListening} />
+        <Pressable onPress={startListening}>
+          <Image source={voiceImg} />
+        </Pressable>
+        // <Button title="듣기 시작" onPress={} />
       )}
     </View>
   );
@@ -50,12 +58,14 @@ const VoiceListening = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
     alignItems: 'center',
   },
   transcriptionText: {
-    marginBottom: 20,
+    marginVertical: 30,
+    fontSize: 40,
+    color: theme.white,
   },
 });
 
