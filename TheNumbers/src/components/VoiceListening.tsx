@@ -6,7 +6,6 @@ import voiceImg from '../assets/images/voice.png';
 import stopButton from '../assets/images/stop-button.png';
 import Tts from 'react-native-tts';
 
-
 const VoiceListening = () => {
   const [text, setText] = useState('');
   const [isListening, setIsListening] = useState(false);
