@@ -1,4 +1,4 @@
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, Text, View} from 'react-native';
 import * as React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {BusStackParamList} from '../../pages/BusSearchScreen';
@@ -17,7 +17,7 @@ function BusStop({navigation}: BusSearchScreenProps) {
     latitude: number;
     longitude: number;
   } | null>(null);
-  const [myBusStop, setMyBusStop] = useState('');
+  // const [myBusStop, setMyBusStop] = useState('');
 
   const toBusNumber = useCallback(() => {
     navigation.navigate('BusNumber');
@@ -41,7 +41,7 @@ function BusStop({navigation}: BusSearchScreenProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.textZoon}>
+      <View>
         <View style={{flexDirection: 'row'}}>
           <Image source={busStopImg} />
           <Text style={{color: theme.white, fontSize: 20}}>정류장명</Text>
