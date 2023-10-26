@@ -22,7 +22,7 @@ public class SeoulBusApiController {
         return seoulBusService.getSeoulBusStationInfoByName(request);
     }
 
-    @PostMapping("/arrival") // 노선, 정류소 ID와 정류소 순번으로 도착 정보 검색
+    @PostMapping("/arrival") // 노선명과 정류소 고유번호로 도착 정보 검색
     public String getBusArrivalInfo(@RequestBody SeoulBusRequest request) {
         return seoulBusService.getSeoulBusArrivalInfo(request);
     }
