@@ -1,9 +1,12 @@
 package com.project.hackaton.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeoulBusRequest {
     private String arsId;
     private String busRouteId;
@@ -14,5 +17,4 @@ public class SeoulBusRequest {
     private String stId;
     private String strSrch;
     private String stSrch;
-
 }
