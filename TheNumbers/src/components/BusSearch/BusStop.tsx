@@ -39,8 +39,8 @@ function BusStop({navigation}: BusSearchScreenProps) {
 
   const apiRequest =  async () => {
     const postData = {
-      tmX: myPosition?.longitude,
-      tmY: myPosition?.latitude
+      tmX: "126.893269",
+      tmY: "37.472748"
     };
     try {
       setLoading(true);

@@ -12,9 +12,19 @@ public class SeoulBusApiController {
 
     private final SeoulBusService seoulBusService;
 
+    @PostMapping("/busId")
+    public String getBusId(@RequestBody SeoulBusRequest request) {
+        return seoulBusService.getSeoulBusId(request);
+    }
+
     @PostMapping("/station/latlng")
     public String getBusStationByCoordinate(@RequestBody SeoulBusRequest request) {
         return seoulBusService.getSeoulBusStationInfo(request);
+    }
+
+    @PostMapping("/station/ord")
+    public String getBusStationOrdByBusNumber(@RequestBody SeoulBusRequest request) {
+        return seoulBusService.getSeoulBusStationOrd(request);
     }
 
     @PostMapping("/station/name")
