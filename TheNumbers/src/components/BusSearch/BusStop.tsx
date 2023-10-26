@@ -1,27 +1,65 @@
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import { Alert, Image, Pressable, Text, View } from "react-native";
 import * as React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {BusStackParamList} from '../../pages/BusSearchScreen';
 import {useCallback, useEffect, useState} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import {theme} from '../../assets/color';
-import busStopImg from '../../assets/images/bus-stop.png';
 import {styles} from '../../assets/styles';
+import axios, { AxiosError } from "axios";
 
 type BusSearchScreenProps = NativeStackScreenProps<
   BusStackParamList,
   'BusStop'
 >;
 function BusStop({navigation}: BusSearchScreenProps) {
+
+  const [loading, setLoading] = useState(false);
   const [myPosition, setMyPosition] = useState<{
     latitude: number;
     longitude: number;
   } | null>(null);
-  const [myBusStop, setMyBusStop] = useState('');
+
+  const [myBusStop, setMyBusStop] = useState({
+    posX: '',
+    posY: '',
+    stationTp: '',
+    stationNm: '',
+    stationId: '',
+    arsId: '',
+    dist: '',
+    gpsX: '',
+    gpsY: '',
+   });
+  // const [busStops, setBusStops] = useState([]);
 
   const toBusNumber = useCallback(() => {
     navigation.navigate('BusNumber');
   }, [navigation]);
+
+  const apiRequest =  async () => {
+    const postData = {
+      tmX: myPosition?.longitude,
+      tmY: myPosition?.latitude
+    };
+    try {
+      setLoading(true);
+      const response = await axios.post('http://218.38.132.187:9090/seoul/station/latlng', postData);
+      console.log(response.data);
+      setMyBusStop(response.data[0]);
+      console.log("myBusStop" + myBusStop);
+      Alert.alert('알림', '버스정보 데이터 도착');
+    } catch (error) {
+      const errorResponse = (error as AxiosError).response;
+      console.error(errorResponse);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    apiRequest();
+  }, []);
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -39,17 +77,23 @@ function BusStop({navigation}: BusSearchScreenProps) {
     );
   }, []);
 
+
   return (
     <View style={styles.container}>
-      <View style={styles.textZoon}>
+      <View>
         <View style={{flexDirection: 'row'}}>
-          <Image source={busStopImg} />
+          <Image source={require('../../assets/images/bus-stop.png')}  />
           <Text style={{color: theme.white, fontSize: 20}}>정류장명</Text>
         </View>
         <View style={styles.border} />
-        <Text style={styles.busStopName}>인헌시장입구</Text>
-        <Text style={styles.busStopNum}>21562</Text>
-        <Text style={styles.busStopMeter}>389m 이내</Text>
+        {/*<ScrollView*/}
+        {/*  data={busStops}*/}
+        {/*  renderItem={renderItem}*/}
+        {/*  keyExtractor={item => item.id.toString()}*/}
+        {/*/>*/}
+        <Text style={styles.busStopName}>{myBusStop.stationNm}</Text>
+        <Text style={styles.busStopNum}>{myBusStop.arsId}</Text>
+        <Text style={styles.busStopMeter}>{myBusStop.dist}m 이내</Text>
         <Text>{myPosition?.latitude}</Text>
         <Text>{myPosition?.longitude}</Text>
       </View>

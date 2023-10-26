@@ -1,8 +1,7 @@
-import {Image, Platform, Pressable, Text, Vibration, View} from 'react-native';
+import {Image, Pressable, Text, Vibration, View} from 'react-native';
 import * as React from 'react';
 import {theme} from '../../assets/color';
 import {styles} from '../../assets/styles';
-import cameraImg from '../../assets/images/camera.png';
 function BusArrival() {
   const ONE_SECOND_IN_MS = 1000;
 
@@ -15,7 +14,7 @@ function BusArrival() {
       <Pressable
         style={{marginTop: 30}}
         onPress={() => Vibration.vibrate(2 * ONE_SECOND_IN_MS)}>
-        <Image source={cameraImg} />
+        <Image source={require('../../assets/images/camera.png')} />
       </Pressable>
     </View>
   );

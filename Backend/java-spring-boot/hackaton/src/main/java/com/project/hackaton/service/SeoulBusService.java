@@ -18,7 +18,7 @@ public class SeoulBusService {
     public String getSeoulBusStationInfo(SeoulBusRequest request) {
         String tmX = request.getTmX(); // X좌표 (WGS84)
         String tmY = request.getTmY(); // Y좌표 (WGS84)
-        String radius = "100"; // 검색 반경 (미터)
+        String radius = "500"; // 검색 반경 (미터)
 
         String stdUri = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByPos?ServiceKey=";
         String cmpUri = stdUri + serviceKey + "&tmX=" + tmX + "&tmY=" + tmY + "&radius=" + radius + "&resultType=json";
