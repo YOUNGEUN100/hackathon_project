@@ -5,10 +5,14 @@ import lombok.Setter;
 
 @Getter
 public class SeoulBusRequest {
-    private String stSrch;
+    private String arsId;
     private String busRouteId;
-    private String stId;
     private String ord;
     private String tmX;
     private String tmY;
+    private String rtNm;
+    private String stId;
+    private String strSrch;
+    private String stSrch;
+
 }
