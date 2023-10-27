@@ -15,6 +15,7 @@ import {theme} from './src/assets/color';
 import busImg from './src/assets/images/bus.png';
 import settingImg from './src/assets/images/setting-button.png';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Tts from 'react-native-tts';
 
 // 페이지의 목록
 type RootStackParamList = {
@@ -28,6 +29,19 @@ type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 // type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
 
 function HomeScreen({navigation}: HomeScreenProps) {
+
+  const [count, setCount] = React.useState(0);
+  const onClick = () => {
+    if (count == 1) {
+      navigation.navigate('BusSearch');
+      setCount(0);
+    } else {
+      Tts.setDefaultLanguage('ko-KR');
+      Tts.speak('버스찾기');
+      setCount(count + 1);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigation.navigate('Setting')} style={styles.settingButton}>
@@ -38,8 +52,10 @@ function HomeScreen({navigation}: HomeScreenProps) {
         <Image source={busImg} />
       </View>
       <View style={styles.screenButtonZoon}>
-        <Pressable
-          onPress={() => navigation.navigate('BusSearch')}
+        <Pressable 
+          onPress={() => {
+            onClick();
+          }}
           style={styles.screenButton}>
           <Text style={styles.screenButtonText}>버스찾기</Text>
         </Pressable>

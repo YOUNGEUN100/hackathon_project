@@ -2,6 +2,7 @@ import {Pressable, StyleSheet, Text, View, ScrollView} from 'react-native';
 import * as React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useState} from 'react';
+import {theme} from '../assets/color';
 
 function SearchHistoryScreen() {
   const [tap, setTap] = useState('bus'); // Work(true), Travel(false) 탭이동
@@ -16,13 +17,13 @@ function SearchHistoryScreen() {
     AsyncStorage.setItem('tap', 'route');
   };
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Pressable onPress={busTap}>
-          <Text>버스찾기</Text>
+          <Text  style={[styles.topButton,styles.topButtonLeft]}>버스찾기</Text>
         </Pressable>
         <Pressable onPress={routeTap}>
-          <Text>길안내</Text>
+          <Text  style={[styles.topButton,styles.topButtonRight]}>길안내</Text>
         </Pressable>
       </View>
       <ScrollView>
@@ -44,10 +45,28 @@ function SearchHistoryScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.bg,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 100,
+    // marginTop: 100,
+  },
+  topButton: {
+    backgroundColor: theme.yellow,
+    paddingVertical: 20,
+  },
+  topButtonLeft: {
+    width : "50%",
+    height : "10%"
+  },
+  topButtonRight: {
+    width : "50%",
+    height : "10%"
   },
 });
 export default SearchHistoryScreen;
