@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
@@ -14,7 +12,7 @@ import reactor.netty.resources.ConnectionProvider;
 import java.time.Duration;
 
 @Configuration
-public class WebClientConfig implements WebMvcConfigurer {
+public class WebClientConfig {
 
     // WebClient를 자동으로 생성하여 Bean처럼 호출할 수 있게 해주는 클래스
     DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory();
@@ -42,13 +40,5 @@ public class WebClientConfig implements WebMvcConfigurer {
                 .pendingAcquireMaxCount(-1)
                 .maxIdleTime(Duration.ofMillis(1000L))
                 .build();
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*")
-                .allowedHeaders("*");
     }
 }

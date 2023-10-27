@@ -44,7 +44,7 @@ function BusStop({navigation}: BusSearchScreenProps) {
     };
     try {
       setLoading(true);
-      const response = await axios.post('http://218.38.132.187:9090/seoul/station/latlng', postData);
+      const response = await axios.post('http://192.168.45.42:9090/seoul/station/latlng', postData);
       console.log(response.data);
       setMyBusStop(response.data[0]);
       console.log("myBusStop" + myBusStop);

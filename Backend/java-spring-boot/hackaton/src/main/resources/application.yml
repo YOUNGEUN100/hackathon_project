@@ -1,13 +1,1 @@
 server.port: 9090
-
-spring:
-  datasource:
-    url: jdbc:mariadb://ec2-3-38-209-71.ap-northeast-2.compute.amazonaws.com:3306/numbers
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: 1234
-  jpa:
-    hibernate:
-      ddl-auto: none # create(처음생성시,테스트), create-drop, update(db가 확정되었을 때,수정단계일때), validate, none(최종)
-    generate-ddl: false # false 가 기본
-    show-sql: true

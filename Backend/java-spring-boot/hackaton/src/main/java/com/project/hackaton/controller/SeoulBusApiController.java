@@ -3,6 +3,8 @@ package com.project.hackaton.controller;
 import com.project.hackaton.dto.SeoulBusRequest;
 import com.project.hackaton.service.SeoulBusService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,28 +14,18 @@ public class SeoulBusApiController {
 
     private final SeoulBusService seoulBusService;
 
-    @PostMapping("/busId")
-    public String getBusId(@RequestBody SeoulBusRequest request) {
-        return seoulBusService.getSeoulBusId(request);
+    @PostMapping("/station/latlng") // 현재 좌표 기준 주변 정류소 검색
+    public ResponseEntity getBusStationByCoordinate(@RequestBody SeoulBusRequest request) {
+        return new ResponseEntity<>(seoulBusService.getSeoulBusStationInfoByLatlng(request), HttpStatus.OK);
     }
 
-    @PostMapping("/station/latlng")
-    public String getBusStationByCoordinate(@RequestBody SeoulBusRequest request) {
-        return seoulBusService.getSeoulBusStationInfo(request);
+    @PostMapping("/station/name") // 정류소 이름 검색
+    public ResponseEntity getBusStationByName(@RequestBody SeoulBusRequest request) {
+        return new ResponseEntity<>(seoulBusService.getSeoulBusStationInfoByName(request), HttpStatus.OK);
     }
 
-    @PostMapping("/station/ord")
-    public String getBusStationOrdByBusNumber(@RequestBody SeoulBusRequest request) {
-        return seoulBusService.getSeoulBusStationOrd(request);
-    }
-
-    @PostMapping("/station/name")
-    public String getBusStationByName(@RequestBody SeoulBusRequest request) {
-        return seoulBusService.getSeoulBusStationInfo(request);
-    }
-
-    @PostMapping("/arrival")
-    public String getBusArrivalInfo(@RequestBody SeoulBusRequest request) {
-        return seoulBusService.getSeoulBusArrivalInfo(request);
+    @PostMapping("/arrival") // 노선명과 정류소 고유번호로 도착 정보 검색
+    public ResponseEntity getBusArrivalInfo(@RequestBody SeoulBusRequest request) {
+        return seoulBusService.getSeoulBusArrivalInfoF(request);
     }
 }

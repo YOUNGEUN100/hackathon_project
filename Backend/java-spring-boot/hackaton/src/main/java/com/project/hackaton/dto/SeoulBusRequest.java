@@ -1,16 +1,20 @@
 package com.project.hackaton.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeoulBusRequest {
+    private String arsId;
+    private String busRouteId;
+    private String ord;
+    private String tmX;
+    private String tmY;
+    private String rtNm;
+    private String stId;
+    private String strSrch;
     private String stSrch;
-    private String busRouteId; // 노선id
-    private String busRouteNm;// 버스노선번호
-    private String stId; // 정류소 고유  id
-    private String arsId; // 정류소 번호
-    private String ord; // 정류소 순번
-    private String tmX; // 경도
-    private String tmY; // 위도
 }
