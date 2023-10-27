@@ -5,6 +5,8 @@ import {theme} from '../assets/color';
 import voiceImg from '../assets/images/voice.png';
 import stopButton from '../assets/images/stop-button.png';
 import Tts from 'react-native-tts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const VoiceListening = () => {
   const [text, setText] = useState('');
@@ -30,6 +32,7 @@ const VoiceListening = () => {
 
   const onSpeechResults = (event: any) => {
     setText(event.value[0]);
+    AsyncStorage.setItem("rtNm", "금천03");
     // Alert.alert('event.value[0]', event.value[0], [ {text: 'Understood', onPress: () => console.log('alert closed')}, ]);
     Tts.setDefaultLanguage('ko-KR');
     Tts.speak(event.value[0]);

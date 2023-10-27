@@ -7,6 +7,7 @@ import Geolocation from '@react-native-community/geolocation';
 import {theme} from '../../assets/color';
 import {styles} from '../../assets/styles';
 import axios, { AxiosError } from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type BusSearchScreenProps = NativeStackScreenProps<
   BusStackParamList,
@@ -21,33 +22,26 @@ function BusStop({navigation}: BusSearchScreenProps) {
   } | null>(null);
 
   const [myBusStop, setMyBusStop] = useState({
-    posX: '',
-    posY: '',
-    stationTp: '',
     stationNm: '',
-    stationId: '',
     arsId: '',
     dist: '',
-    gpsX: '',
-    gpsY: '',
    });
-  // const [busStops, setBusStops] = useState([]);
 
   const toBusNumber = useCallback(() => {
     navigation.navigate('BusNumber');
+    AsyncStorage.setItem("arsId", myBusStop.arsId);
   }, [navigation]);
 
-  const apiRequest =  async () => {
+  const getStationInfo =  async () => {
     const postData = {
       tmX: "126.893269",
       tmY: "37.472748"
     };
     try {
       setLoading(true);
-      const response = await axios.post('http://192.168.45.42:9090/seoul/station/latlng', postData);
+      const response = await axios.post('http://218.38.132.187:9090/seoul/station/latlng', postData);
       console.log(response.data);
-      setMyBusStop(response.data[0]);
-      console.log("myBusStop" + myBusStop);
+      setMyBusStop(response.data);
       Alert.alert('알림', '버스정보 데이터 도착');
     } catch (error) {
       const errorResponse = (error as AxiosError).response;
@@ -58,7 +52,7 @@ function BusStop({navigation}: BusSearchScreenProps) {
   };
 
   useEffect(() => {
-    apiRequest();
+    getStationInfo();
   }, []);
 
   useEffect(() => {
