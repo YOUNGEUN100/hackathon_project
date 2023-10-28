@@ -26,6 +26,11 @@ public class SeoulBusApiController {
 
     @PostMapping("/arrival") // 노선명과 정류소 고유번호로 도착 정보 검색
     public ResponseEntity getBusArrivalInfo(@RequestBody SeoulBusRequest request) {
-        return seoulBusService.getSeoulBusArrivalInfoF(request);
+        if(request.getOrd() == null) {
+            return seoulBusService.getSeoulBusArrivalInfoF(request);
+        } else {
+            return seoulBusService.getSeoulBusArrivalInfoL(request);
+        }
+
     }
 }

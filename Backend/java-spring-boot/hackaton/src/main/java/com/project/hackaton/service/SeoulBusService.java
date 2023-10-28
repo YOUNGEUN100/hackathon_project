@@ -122,7 +122,7 @@ public class SeoulBusService {
             System.out.println(result);
             System.out.println("-----------------------");
 
-            return new ResponseEntity<>( SeoulBusResponse.builder()
+            return new ResponseEntity<>(SeoulBusResponse.builder()
                     .adirection(returnObject.getString("adirection"))
                     .arsId(returnObject.getString("arsId"))
                     .arrmsg1(returnObject.getString("arrmsg1"))
@@ -139,5 +139,39 @@ public class SeoulBusService {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         }
+    }
+
+    public ResponseEntity getSeoulBusArrivalInfoL(SeoulBusRequest request) {
+
+        String stId = request.getStId(); // 정류소 ID
+        String busRouteId = request.getBusRouteId(); // 노선 ID
+        String ord = request.getOrd(); // 노선 정류소 순번
+
+        String uri = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRoute?ServiceKey="
+                + serviceKey + "&stId=" + stId + "&busRouteId=" + busRouteId + "&ord=" + ord
+                + "&resultType=json";
+
+        String response = webClient.get(uri, String.class);
+
+        JSONObject jsonObject = new JSONObject(response);
+
+        System.out.println(jsonObject);
+
+        JSONObject result = jsonObject.getJSONObject("msgBody")
+                .getJSONArray("itemList")
+                .getJSONObject(0);
+
+        System.out.println("getArrInfoByRoute------");
+        System.out.println(result);
+        System.out.println("-----------------------");
+
+        return new ResponseEntity<>(SeoulBusResponse.builder()
+                .arsId(result.getString("arsId"))
+                .arrmsg1(result.getString("arrmsg1"))
+                .busRouteId(result.getString("busRouteId"))
+                .rtNm(result.getString("rtNm"))
+                .staOrd(result.getString("staOrd"))
+                .stationNm(result.getString("stNm"))
+                .build(), HttpStatus.OK);
     }
 }
