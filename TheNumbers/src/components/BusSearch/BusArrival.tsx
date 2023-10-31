@@ -38,7 +38,7 @@ function BusArrival() {
       let parts = (arrivalInfo.arrmsg1).split("[");
       console.log("parts" + parts);
       setStArrival(parts[0]);
-      setTimeArrival(parts[1]);
+      setTimeArrival(parts[1].replace("]", ""));
    }
 
    useEffect(()=>{
@@ -53,13 +53,8 @@ function BusArrival() {
     <View style={styles.container}>
       <Text style={styles.infoText}>{arrivalInfo.stationNm}</Text>
       <Text style={{...styles.infoText, color: theme.green}}>{arrivalInfo.rtNm}</Text>
-      <Text style={styles.infoText}>{stArrival}</Text>
-      <Text style={styles.infoText}>{timeArrival}</Text>
-      <Pressable
-        style={{marginTop: 30}}
-        onPress={() => Vibration.vibrate(2 * ONE_SECOND_IN_MS)}>
-        <Image source={require('../../assets/images/camera.png')} />
-      </Pressable>
+      <Text style={styles.infoText}>{timeArrival} 정류장 </Text>
+      <Text style={styles.infoText}>{stArrival} 도착예정</Text>
     </View>
   );
 }

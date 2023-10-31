@@ -8,6 +8,7 @@ import {theme} from '../../assets/color';
 import {styles} from '../../assets/styles';
 import axios, { AxiosError } from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type BusSearchScreenProps = NativeStackScreenProps<
   BusStackParamList,
@@ -76,15 +77,10 @@ function BusStop({navigation}: BusSearchScreenProps) {
     <View style={styles.container}>
       <View>
         <View style={{flexDirection: 'row'}}>
-          <Image source={require('../../assets/images/bus-stop.png')}  />
-          <Text style={{color: theme.white, fontSize: 20}}>정류장명</Text>
+          <IconMCI name='bus-stop' size={30} color={theme.white}/>
+          <Text style={{color: theme.white, fontSize: 20, marginLeft: 10}}>정류장명</Text>
         </View>
         <View style={styles.border} />
-        {/*<ScrollView*/}
-        {/*  data={busStops}*/}
-        {/*  renderItem={renderItem}*/}
-        {/*  keyExtractor={item => item.id.toString()}*/}
-        {/*/>*/}
         <Text style={styles.busStopName}>{myBusStop.stationNm}</Text>
         <Text style={styles.busStopNum}>{myBusStop.arsId}</Text>
         <Text style={styles.busStopMeter}>{myBusStop.dist}m 이내</Text>

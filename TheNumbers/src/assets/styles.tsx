@@ -2,11 +2,45 @@ import {StyleSheet} from 'react-native';
 import {theme} from './color';
 
 export const styles = StyleSheet.create({
+  // 공통
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: theme.bg,
+  },
+  // 앱 메인 화면
+  title: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: theme.white,
+    marginRight: 10,
+  },
+  buttonZone: {
+    flex: 4,
+  },
+  screenButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: "row",
+    backgroundColor: theme.yellow,
+    paddingHorizontal: 80,
+    paddingVertical: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  screenButtonText: {
+    marginLeft: 15,
+    fontSize: 35,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: theme.black,
   },
   guideContainer: {
     flex: 1,
@@ -27,15 +61,18 @@ export const styles = StyleSheet.create({
     color: theme.yellow,
     fontSize: 30,
     marginTop: 10,
+    textAlign: 'center',
   },
   busStopNum: {
     color: theme.yellow,
     marginTop: 5,
+    textAlign: 'center',
   },
   busStopMeter: {
     color: theme.yellow,
     marginTop: 20,
     fontSize: 20,
+    textAlign: 'center',
   },
   changeButton: {
     marginVertical: 20,

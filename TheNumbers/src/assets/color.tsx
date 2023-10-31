@@ -1,4 +1,8 @@
 export const theme = {
+  back: '#000000',
+  main: '#F2F564',
+  sub: '#FFFFFF',
+
   bg: '#000000',
   black: '#000000',
   white: '#FFFFFF',

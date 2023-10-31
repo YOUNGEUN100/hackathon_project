@@ -39,8 +39,9 @@ function CheckLocation({navigation}: GuideSearchScreenProps) {
     )
       .then(response => response.json())
       .then(data => {
+        // console.log(data.results);
         setStartAdd(data.results[0].formatted_address);
-        console.log(startAdd);
+        // console.log(startAdd);
       })
       .catch(error => console.warn(error));
   }, [myDeparture]);

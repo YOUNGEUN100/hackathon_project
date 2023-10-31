@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BusStop from '../components/BusSearch/BusStop';
 import BusNumber from '../components/BusSearch/BusNumber';
 import BusArrival from '../components/BusSearch/BusArrival';
+import { theme } from "../assets/color";
 
 // 페이지의 목록
 export type BusStackParamList = {

@@ -11,11 +11,10 @@ import SearchHistoryScreen from './src/pages/SearchHistoryScreen';
 import Setting from './src/pages/Setting';
 import usePermissions from './src/hooks/usePermissions';
 import {theme} from './src/assets/color';
-// @ts-ignore
-import busImg from './src/assets/images/bus.png';
-import settingImg from './src/assets/images/setting-button.png';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import Tts from 'react-native-tts';
+import { styles } from "./src/assets/styles";
 
 // 페이지의 목록
 type RootStackParamList = {
@@ -44,30 +43,34 @@ function HomeScreen({navigation}: HomeScreenProps) {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigation.navigate('Setting')} style={styles.settingButton}>
-        <Image source={settingImg} />
-      </Pressable>
       <View style={styles.title}>
         <Text style={styles.titleText}>넘버스</Text>
-        <Image source={busImg} />
+        <Icon name="bus" size={60} color={theme.white}/>
       </View>
-      <View style={styles.screenButtonZoon}>
-        <Pressable 
+      <View style={styles.buttonZone}>
+        <Pressable
           onPress={() => {
             onClick();
           }}
           style={styles.screenButton}>
-          <Text style={styles.screenButtonText}>버스찾기</Text>
+          <Icon name="bus-sharp" size={40} color={theme.black}/>
+          <Text style={styles.screenButtonText}>버스안내</Text>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate('RouteGuide')}
           style={styles.screenButton}>
+          <IconMCI name="road" size={40} color={theme.black}/>
           <Text style={styles.screenButtonText}>길안내</Text>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate('SearchHistory')}
           style={styles.screenButton}>
+          <Icon name='list' size={40} color={theme.black} />
           <Text style={styles.screenButtonText}>검색내역</Text>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('Setting')} style={styles.screenButton}>
+          <Icon name="settings-outline" size={40} color={theme.black}/>
+          <Text style={styles.screenButtonText}>환경설정</Text>
         </Pressable>
       </View>
     </View>
@@ -111,45 +114,5 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.bg,
-  },
-  settingButton: {
-    position: 'absolute', // 절대 위치 설정
-    top: 30, // 상단에서의 거리
-    right: 30, // 오른쪽에서의 거리
-  },
-  title: {
-    marginTop: 35,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: theme.white,
-    marginRight: 10,
-  },
-  screenButtonZoon: {
-    marginTop: 60,
-  },
-  screenButton: {
-    backgroundColor: theme.yellow,
-    paddingHorizontal: 80,
-    paddingVertical: 20,
-    borderRadius: 10,
-    marginBottom: 60,
-  },
-  screenButtonText: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: theme.black,
-  },
-});
 
 export default App;
