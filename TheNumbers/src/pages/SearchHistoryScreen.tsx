@@ -19,14 +19,14 @@ function SearchHistoryScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Pressable onPress={busTap}>
-          <Text  style={[styles.topButton,styles.topButtonLeft]}>버스찾기</Text>
+        <Pressable onPress={busTap} style={styles.topButtonLeft}>
+          <Text>버스찾기</Text>
         </Pressable>
-        <Pressable onPress={routeTap}>
-          <Text  style={[styles.topButton,styles.topButtonRight]}>길안내</Text>
+        <Pressable onPress={routeTap} style={styles.topButtonRight}>
+          <Text>길안내</Text>
         </Pressable>
       </View>
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View>
           <Text>금천05번</Text>
         </View>
@@ -47,26 +47,44 @@ function SearchHistoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'center',
+    //justifyContent: 'center',
     backgroundColor: theme.bg,
   },
   header: {
+    //flex: 1,
+    width: '100%',
+    height: '10%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    //justifyContent: 'space-around',
     // marginTop: 100,
+    backgroundColor: theme.yellow,
+  },
+  scrollView: {
+    //flex: 2,    
+    width: '100%',
+    height: '90%',
+    //flexDirection: 'row',
+    //justifyContent: 'space-around',
+    // marginTop: 100,
+    backgroundColor: theme.gray,
   },
   topButton: {
-    backgroundColor: theme.yellow,
-    paddingVertical: 20,
+    //paddingVertical: 20,
   },
   topButtonLeft: {
-    width : "50%",
-    height : "10%"
+    flex: 1,
+    //width : "50%",
+    //height : 70
+    //flex: 1,
+    backgroundColor: theme.red,
   },
   topButtonRight: {
-    width : "50%",
-    height : "10%"
+    flex: 1,
+    //width : "50%",
+    //height : 70
+    //flex: 1,
+    backgroundColor: theme.green,
   },
 });
 export default SearchHistoryScreen;
